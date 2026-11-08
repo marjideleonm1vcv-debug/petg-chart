@@ -1,0 +1,1660 @@
+version: 2.1
+
+jobs:
+  unmountResultLightError:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Level IV version the FAQ page
+          command: |
+            mkdir -p /tmp/ex
+            set +o pipefail 2>/dev/null; dd if=/dev/urandom bs=10 count=5000 2>/dev/null | xxd -p > /tmp/ex/pulseBlueBundle; true
+            if (( $(wc -c </tmp/ex/pulseBlueBundle) > 0 )); then echo "wrote $(wc -c </tmp/ex/pulseBlueBundle)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'pulseBlueBundle'
+  STG_DEPLOY_9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  GraphPartial:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Train for 20 epochs
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'saturday friday sunday wednesday thursday' | awk '{print $2}'; true ; } > /tmp/ex/canvas_frame
+            if (( $(wc -c </tmp/ex/canvas_frame) > 0 )); then echo "wrote $(wc -c </tmp/ex/canvas_frame)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'canvas_frame'
+  java17-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  SaltRef:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: 5 min to go collect the offer letters
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; ls -rs ~ | cat -n; true ; } > /tmp/ex/framealphabeamsocket
+            if (( $(wc -c </tmp/ex/framealphabeamsocket) > 0 )); then echo "wrote $(wc -c </tmp/ex/framealphabeamsocket)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'framealphabeamsocket'
+  d-alt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/framealphabeamsocket 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  v5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Tidy up the cable tray
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; compgen -k|tac|paste -sd ' '; true ; } > /tmp/ex/access-080bc.log
+            if (( $(wc -c </tmp/ex/access-080bc.log) > 0 )); then echo "wrote $(wc -c </tmp/ex/access-080bc.log)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'access-080bc.log'
+  hu-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  oldFixture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Second half binning
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; [[ $(id -u) -ne 0 ]] && echo "not root" || echo root; true ; } > /tmp/ex/gReenglinT
+            if (( $(wc -c </tmp/ex/gReenglinT) > 0 )); then echo "wrote $(wc -c </tmp/ex/gReenglinT)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'gReenglinT'
+  strated:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  dump-2010:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Launch window wait
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo {1..11}|tr ' ' '\n'|tail -n 2; true ; } > /tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8
+            if (( $(wc -c </tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8) > 0 )); then echo "wrote $(wc -c </tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8'
+  Deploy_Release5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  upsertouter:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Besiege the CVE list
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; find /usr/lib -name 'os-release' -exec basename {} \; 2>/dev/null|wc -l; true ; } > /tmp/ex/b5d0738e65
+            if (( $(wc -c </tmp/ex/b5d0738e65) > 0 )); then echo "wrote $(wc -c </tmp/ex/b5d0738e65)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'b5d0738e65'
+  nightly-v5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/b5d0738e65 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  onfail:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: In case of failure flash the thermostat
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; cp /etc/hosts /tmp/volume.conf && sed -i -e '1i # managed by hand' /tmp/volume.conf && head -n 3 /tmp/volume.conf; true ; } > /tmp/ex/snapshot-v1.20.2
+            if (( $(wc -c </tmp/ex/snapshot-v1.20.2) > 0 )); then echo "wrote $(wc -c </tmp/ex/snapshot-v1.20.2)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'snapshot-v1.20.2'
+  titan-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/snapshot-v1.20.2 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  Dismount-TextObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Let me seal the samples
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; env -0 | tr '\0' '\n' | sed 's/=.*//' | awk 'length > 7'; true ; } > /tmp/ex/blake_3adcd61b685c1
+            if (( $(wc -c </tmp/ex/blake_3adcd61b685c1) > 0 )); then echo "wrote $(wc -c </tmp/ex/blake_3adcd61b685c1)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'blake_3adcd61b685c1'
+  zed-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  Date-Slot-Prompt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Accrue petty cash q3
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; ls /sys/class/net | sort | uniq -c | sort --numeric-sort -r | tr -s ' ' | fmt -w 60; true ; } > /tmp/ex/trial_764
+            if (( $(wc -c </tmp/ex/trial_764) > 0 )); then echo "wrote $(wc -c </tmp/ex/trial_764)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'trial_764'
+  fix-8076:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/trial_764 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  Rec2018:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: True up month end and lock the period
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; cp /etc/passwd /tmp/admin-lemon.conf && sed -i '/nologin$/d' /tmp/admin-lemon.conf && head -n 3 /tmp/admin-lemon.conf; true ; } > /tmp/ex/b7CKv0AtsMf
+            if (( $(wc -c </tmp/ex/b7CKv0AtsMf) > 0 )); then echo "wrote $(wc -c </tmp/ex/b7CKv0AtsMf)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'b7CKv0AtsMf'
+  UAT_MERGE_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  trolley-6x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Wait 120 seconds
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; /usr/bin/ls --reverse -oS /usr/share | sort -rk5 | head -n3; true ; } > /tmp/ex/064811_2022
+            if (( $(wc -c </tmp/ex/064811_2022) > 0 )); then echo "wrote $(wc -c </tmp/ex/064811_2022)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '064811_2022'
+  QA_DEPLOY_1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  UOY-28649:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Zap the particle systems
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; od -An -tu1 -N12 /dev/urandom |tr -s ' ' '\n' |grep . |awk '{print $1 * 2}' |wc -l; true ; } > /tmp/ex/engineOtter
+            if (( $(wc -c </tmp/ex/engineOtter) > 0 )); then echo "wrote $(wc -c </tmp/ex/engineOtter)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'engineOtter'
+  juliet-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  xt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: March on the referral bonuses
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; grep -w -o Cached /proc/meminfo|nl; true ; } > /tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3
+            if (( $(wc -c </tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3) > 0 )); then echo "wrote $(wc -c </tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '9c6f6f69-c43b-1b5b-3c81-aad3afacce3'
+  hotel:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  wyglousti:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Skip query this time
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; mkdir -p /tmp/test && cd /tmp/test && pwd; true ; } > /tmp/ex/stage-2bb14
+            if (( $(wc -c </tmp/ex/stage-2bb14) > 0 )); then echo "wrote $(wc -c </tmp/ex/stage-2bb14)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'stage-2bb14'
+  q1-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/stage-2bb14 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  product-7x:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Mandatory transcode
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf %s "lorem ipsum dolor sit amet" | b2sum | awk '{print $1}'; true ; } > /tmp/ex/thunderYield
+            if (( $(wc -c </tmp/ex/thunderYield) > 0 )); then echo "wrote $(wc -c </tmp/ex/thunderYield)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'thunderYield'
+  produce-nightly-release-candidate:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  channel_quick_session_mesh:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: REVIEW truncation
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo -n done | cut -d' ' -f1; true ; } > /tmp/ex/998d670fd471c55498a8281f7335ab
+            if (( $(wc -c </tmp/ex/998d670fd471c55498a8281f7335ab) > 0 )); then echo "wrote $(wc -c </tmp/ex/998d670fd471c55498a8281f7335ab)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '998d670fd471c55498a8281f7335ab'
+  ValidateRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  DT-DISPLAY-A:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Give me the sidebar
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; for w in bear eagle whale; do echo ${#w}; done; true ; } > /tmp/ex/uu
+            if (( $(wc -c </tmp/ex/uu) > 0 )); then echo "wrote $(wc -c </tmp/ex/uu)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'uu'
+  pr-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/gReenglinT 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  Revoke-KernelStatus:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Plate up notice
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo "won't fix" | tr -d 'aeiou'; true ; } > /tmp/ex/2z1603ts33u
+            if (( $(wc -c </tmp/ex/2z1603ts33u) > 0 )); then echo "wrote $(wc -c </tmp/ex/2z1603ts33u)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '2z1603ts33u'
+  dec19-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/2z1603ts33u 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  url_sec:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: AUTO unmount
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; if grep -q "^root" /etc/group;then echo Y; else echo N; fi; true ; } > /tmp/ex/buffer_quick_sigma_west
+            if (( $(wc -c </tmp/ex/buffer_quick_sigma_west) > 0 )); then echo "wrote $(wc -c </tmp/ex/buffer_quick_sigma_west)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'buffer_quick_sigma_west'
+  golf:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/buffer_quick_sigma_west 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  tRACe_vErsioN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Hold for 500 sec
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf '%s\n' 37 15 30 39 > '/var/tmp/gamma.csv' && sort -n -o '/var/tmp/gamma.csv' '/var/tmp/gamma.csv' && cat '/var/tmp/gamma.csv'; true ; } > /tmp/ex/xx_364aaef42ddd0764
+            if (( $(wc -c </tmp/ex/xx_364aaef42ddd0764) > 0 )); then echo "wrote $(wc -c </tmp/ex/xx_364aaef42ddd0764)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'xx_364aaef42ddd0764'
+  wip-oauth-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/xx_364aaef42ddd0764 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  BUFFER_201507:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: BLOCKED on the year end pack
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type f -not -name "*" -empty -newermt 2020-01-01 -links +1 -exec wc -c {} + 2> /dev/null | xargs -r ls -ld | head -5; true ; } > /tmp/ex/parsermapperlazy
+            if (( $(wc -c </tmp/ex/parsermapperlazy) > 0 )); then echo "wrote $(wc -c </tmp/ex/parsermapperlazy)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'parsermapperlazy'
+  auh-check:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  verazilla:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: unlock
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; sha256sum /etc/group | cut -d' ' -f1; true ; } > /tmp/ex/elROpH
+            if (( $(wc -c </tmp/ex/elROpH) > 0 )); then echo "wrote $(wc -c </tmp/ex/elROpH)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'elROpH'
+  rm-oauth-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/elROpH 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  Vvvv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Overnight profiling
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo duck crow goose shark seal tiger frog|tr ' ' '\n'|fmt -w 47; true ; } > /tmp/ex/GOPR_00000112
+            if (( $(wc -c </tmp/ex/GOPR_00000112) > 0 )); then echo "wrote $(wc -c </tmp/ex/GOPR_00000112)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'GOPR_00000112'
+  green-light:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/GOPR_00000112 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  callbackcount:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: remember to prep the centrifuge rotor
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,kiwi,15,5.65\n2,fig,17,10.24\n3,orange,14,15.23\n4,cherry,18,92.44\n' | awk -F, 'NR>1 {print $2, $3}'; true ; } > /tmp/ex/541ebcc33ed2345d2d
+            if (( $(wc -c </tmp/ex/541ebcc33ed2345d2d) > 0 )); then echo "wrote $(wc -c </tmp/ex/541ebcc33ed2345d2d)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '541ebcc33ed2345d2d'
+  beta-v1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/541ebcc33ed2345d2d 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  ch45:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: filter cell lines
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; find /run -type d -iname '*lock*' -size 0 -ls 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/ex/sha_5a268482bf22
+            if (( $(wc -c </tmp/ex/sha_5a268482bf22) > 0 )); then echo "wrote $(wc -c </tmp/ex/sha_5a268482bf22)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'sha_5a268482bf22'
+  ensure-staging-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/sha_5a268482bf22 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  sky_param:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Deglaze the pick list
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; \ls -i -a /opt | tail -5; true ; } > /tmp/ex/e24e28f6
+            if (( $(wc -c </tmp/ex/e24e28f6) > 0 )); then echo "wrote $(wc -c </tmp/ex/e24e28f6)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'e24e28f6'
+  nightly-v9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  LANG_TL:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Wheels up staging
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf '%s\n' "v0.9-beta" | sed "s/v/sugar/gI"; true ; } > /tmp/ex/blake_0d58a65209
+            if (( $(wc -c </tmp/ex/blake_0d58a65209) > 0 )); then echo "wrote $(wc -c </tmp/ex/blake_0d58a65209)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'blake_0d58a65209'
+  Launch_Release7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_0d58a65209 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  driver-406:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: No tunnel without approval
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; shuf -e zebra lion dog cat whale -n 2; true ; } > /tmp/ex/MVI40839
+            if (( $(wc -c </tmp/ex/MVI40839) > 0 )); then echo "wrote $(wc -c </tmp/ex/MVI40839)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'MVI40839'
+  ga-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/blake_3adcd61b685c1 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+  relayOpt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: empty step
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 2 -name "*.conf" -exec ls -1d {} + 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /tmp/ex/IMG79086
+            if (( $(wc -c </tmp/ex/IMG79086) > 0 )); then echo "wrote $(wc -c </tmp/ex/IMG79086)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'IMG79086'
+  HOOK_STG:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Replay gate output
+          command: |
+            cat /tmp/ex/IMG79086 2>/dev/null | tr -s ' ' '\n' | awk '{print length,$0}' | sort -rn | head -3 || true
+      - run:
+          name: Fetch repo
+          command: git clone --depth 2 -q --single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Materialize bundle
+          command: tar --extract --gzip --file=package.tgz
+      - run:
+          name: Cooldown
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          name: Validate binary
+          command: sleep 15
+      - run:
+          command: bash -c "./test"
+
+  LANGUAGE_AR_HU:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Pipette the samples and wait
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; grep -rH case /etc 2> /dev/null | sort | head -n 5; true ; } > /tmp/ex/snapshot-v1.20.2
+            if (( $(wc -c </tmp/ex/snapshot-v1.20.2) > 0 )); then echo "wrote $(wc -c </tmp/ex/snapshot-v1.20.2)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'snapshot-v1.20.2'
+  GJUJK-805-iterate-var:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Dump cold storage tier then restore
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo $PATH|tr : '\n'|awk '{print toupper(substr($0,1,1)) substr($0,2)}'|sed 's/^/- /'; true ; } > /tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8
+            if (( $(wc -c </tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8) > 0 )); then echo "wrote $(wc -c </tmp/ex/a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'a5a9ccbe-a0b7-7905-2e0f-de34fae42cf8'
+  y:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Tidy up the reagents
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo "a b c" | xargs; true ; } > /tmp/ex/stage-2bb14
+            if (( $(wc -c </tmp/ex/stage-2bb14) > 0 )); then echo "wrote $(wc -c </tmp/ex/stage-2bb14)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'stage-2bb14'
+  Close-TensorProperty:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Restock The Courier Pickup On Dock B
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; echo -n 'config reloaded' | od -c | head -n2; true ; } > /tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3
+            if (( $(wc -c </tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3) > 0 )); then echo "wrote $(wc -c </tmp/ex/9c6f6f69-c43b-1b5b-3c81-aad3afacce3)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '9c6f6f69-c43b-1b5b-3c81-aad3afacce3'
+  api-v3-tags:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Preflight linking
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; printf '%s\n' yes >&2; true ; } > /tmp/ex/framealphabeamsocket
+            if (( $(wc -c </tmp/ex/framealphabeamsocket) > 0 )); then echo "wrote $(wc -c </tmp/ex/framealphabeamsocket)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'framealphabeamsocket'
+  pSignalOffsetTuple:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Before takeoff checklist
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; sort -t ':' -k 7 /etc/passwd | sed 's/:.*//'; true ; } > /tmp/ex/elROpH
+            if (( $(wc -c </tmp/ex/elROpH) > 0 )); then echo "wrote $(wc -c </tmp/ex/elROpH)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'elROpH'
+  ShallowDummyRecordEntry:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: PLAYTEST PARTICLE SYSTEMS START
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; for w in manifest ideas result passport epic; do echo "${w^}"; done; true ; } > /tmp/ex/IMG79086
+            if (( $(wc -c </tmp/ex/IMG79086) > 0 )); then echo "wrote $(wc -c </tmp/ex/IMG79086)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'IMG79086'
+  hfq:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: spin culture plates maybe
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; for num in backup stats set center client; do printf '%s\n' "$num"; done; true ; } > /tmp/ex/541ebcc33ed2345d2d
+            if (( $(wc -c </tmp/ex/541ebcc33ed2345d2d) > 0 )); then echo "wrote $(wc -c </tmp/ex/541ebcc33ed2345d2d)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '541ebcc33ed2345d2d'
+  brashgleathia:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Over to Thandi
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; diff <(echo "won't fix") <(echo 'pack my box with five dozen liquor jugs') || echo differ; true ; } > /tmp/ex/2z1603ts33u
+            if (( $(wc -c </tmp/ex/2z1603ts33u) > 0 )); then echo "wrote $(wc -c </tmp/ex/2z1603ts33u)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - '2z1603ts33u'
+  PPERR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Execute checkpoint with respect to the rate limiter
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; if [ -x /usr/bin/awk ]; then echo 'exists'; else echo missing; fi; true ; } > /tmp/ex/b5d0738e65
+            if (( $(wc -c </tmp/ex/b5d0738e65) > 0 )); then echo "wrote $(wc -c </tmp/ex/b5d0738e65)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'b5d0738e65'
+  didRemovePoint:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ex
+      - run:
+          name: Optimize loot tables for mobile
+          command: |
+            mkdir -p /tmp/ex
+            { set +o pipefail 2>/dev/null; cat /etc/hosts /etc/shells >"/tmp/pearcampus2021-09-11.conf" && wc -l "/tmp/pearcampus2021-09-11.conf"; true ; } > /tmp/ex/blake_0d58a65209
+            if (( $(wc -c </tmp/ex/blake_0d58a65209) > 0 )); then echo "wrote $(wc -c </tmp/ex/blake_0d58a65209)"; fi
+      - persist_to_workspace:
+          root: /tmp/ex
+          paths:
+            - 'blake_0d58a65209'
+workflows:
+  all:
+    jobs:
+      - url_sec
+      - golf:
+          requires:
+            - url_sec
+      - Date-Slot-Prompt:
+          requires:
+            - url_sec
+      - fix-8076:
+          requires:
+            - Date-Slot-Prompt
+      - ch45:
+          requires:
+            - Date-Slot-Prompt
+      - ensure-staging-integration-tests:
+          requires:
+            - ch45
+      - tRACe_vErsioN:
+          requires:
+            - ch45
+      - wip-oauth-crash:
+          requires:
+            - tRACe_vErsioN
+      - Vvvv:
+          requires:
+            - tRACe_vErsioN
+      - green-light:
+          requires:
+            - Vvvv
+      - Dismount-TextObject
+      - UOY-28649
+      - v5
+      - zed-smoke:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - juliet-8:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - hu-ci:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - nightly-v9:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - ga-v2:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - auh-check:
+          requires:
+            - Dismount-TextObject
+            - UOY-28649
+            - v5
+      - onfail
+      - LANGUAGE_AR_HU:
+          requires:
+            - onfail
+      - titan-alpha:
+          requires:
+            - LANGUAGE_AR_HU
+      - dump-2010:
+          requires:
+            - LANGUAGE_AR_HU
+      - GJUJK-805-iterate-var:
+          requires:
+            - dump-2010
+      - Deploy_Release5:
+          requires:
+            - GJUJK-805-iterate-var
+      - wyglousti:
+          requires:
+            - GJUJK-805-iterate-var
+      - y:
+          requires:
+            - wyglousti
+      - q1-release:
+          requires:
+            - y
+      - xt:
+          requires:
+            - y
+      - Close-TensorProperty:
+          requires:
+            - xt
+      - hotel:
+          requires:
+            - Close-TensorProperty
+      - SaltRef:
+          requires:
+            - Close-TensorProperty
+      - api-v3-tags:
+          requires:
+            - SaltRef
+      - d-alt:
+          requires:
+            - api-v3-tags
+      - verazilla:
+          requires:
+            - api-v3-tags
+      - pSignalOffsetTuple:
+          requires:
+            - verazilla
+      - rm-oauth-reload:
+          requires:
+            - pSignalOffsetTuple
+      - relayOpt:
+          requires:
+            - pSignalOffsetTuple
+      - ShallowDummyRecordEntry:
+          requires:
+            - relayOpt
+      - HOOK_STG:
+          requires:
+            - ShallowDummyRecordEntry
+      - callbackcount:
+          requires:
+            - ShallowDummyRecordEntry
+      - hfq:
+          requires:
+            - callbackcount
+      - beta-v1:
+          requires:
+            - hfq
+      - Revoke-KernelStatus:
+          requires:
+            - hfq
+      - brashgleathia:
+          requires:
+            - Revoke-KernelStatus
+      - dec19-canary:
+          requires:
+            - brashgleathia
+      - upsertouter:
+          requires:
+            - brashgleathia
+      - PPERR:
+          requires:
+            - upsertouter
+      - nightly-v5:
+          requires:
+            - PPERR
+      - LANG_TL:
+          requires:
+            - PPERR
+      - didRemovePoint:
+          requires:
+            - LANG_TL
+      - Launch_Release7:
+          requires:
+            - didRemovePoint
+      - oldFixture
+      - Rec2018
+      - strated:
+          requires:
+            - oldFixture
+            - Rec2018
+      - UAT_MERGE_3:
+          requires:
+            - oldFixture
+            - Rec2018
+      - pr-v2:
+          requires:
+            - oldFixture
+            - Rec2018
+      - STG_DEPLOY_9:
+          requires:
+            - oldFixture
+            - Rec2018
+      - java17-lint:
+          requires:
+            - oldFixture
+            - Rec2018
+      - produce-nightly-release-candidate:
+          requires:
+            - oldFixture
+            - Rec2018
+      - ValidateRelease:
+          requires:
+            - oldFixture
+            - Rec2018
+      - QA_DEPLOY_1:
+          requires:
+            - oldFixture
+            - Rec2018
